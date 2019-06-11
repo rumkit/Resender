@@ -36,21 +36,32 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="16" />
-                            <Label Text="{Binding Phone}" 
-                                d:Text="Phone number"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="13" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand"
+                                       Text="{Binding Name}" 
+                                       d:Text="{Binding .}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="16" />
+                                <Label HorizontalOptions="End"
+                                       Text="{Binding Phone}" 
+                                       d:Text="Text to send"
+                                       LineBreakMode="NoWrap" 
+                                       FontSize="14" >
+                                       <Label.Style>
+                                           <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="#2196F3" />
+                                           </Style>
+                                       </Label.Style>
+                                </Label>
+                            </StackLayout>
                             <Label Text="{Binding Text}" 
-                                d:Text="Text to send"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="13" />                            
+                                       d:Text="Text to send"
+                                       LineBreakMode="NoWrap" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="13" />
+
+
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
