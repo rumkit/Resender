@@ -28,12 +28,24 @@ namespace Resender.Views
 
             var item = new Item
             {
-                Text = "Item 1",
-                Phone = "This is an item description."
+                Name = "Item name here",
+                Text = "Text to send",
+                Phone = "+7 000 000-00-00"
             };
 
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
+        }
+
+        async void Delete_Clicked(object sender, EventArgs e)
+        {
+            string answer = await DisplayActionSheet("Delete current item?", "Cancel", "Delete");
+            if (answer == "Delete")
+            {
+                viewModel.DeleteCurrentItem();
+                MessagingCenter.Send(this, "RefreshItems");
+                await Navigation.PopAsync();
+            }
         }
     }
 }

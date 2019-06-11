@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              x:Class="Resender.Views.ItemDetailPage"
              Title="{Binding Title}">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Name:" FontSize="Medium" />
         <Label Text="{Binding Item.Name}" d:Text="Name" FontSize="Small"/>

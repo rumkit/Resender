@@ -27,6 +27,11 @@ namespace Resender.ViewModels
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
+
+            MessagingCenter.Subscribe<ItemDetailPage>(this, "RefreshItems", async (obj) =>
+                {
+                    await ExecuteLoadItemsCommand();
+                });
         }
 
         async Task ExecuteLoadItemsCommand()

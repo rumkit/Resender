@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Resender.Models;
+using Xamarin.Forms;
 
 namespace Resender.ViewModels
 {
@@ -11,6 +12,11 @@ namespace Resender.ViewModels
         {
             Title = item?.Name;
             Item = item;
+        }
+
+        public async void DeleteCurrentItem()
+        {
+            await DataStore.DeleteItemAsync(Item.Id);
         }
     }
 }

@@ -38,7 +38,8 @@ namespace Resender.Droid
 
         public Task<bool> DeleteItemAsync(int id)
         {
-            throw new NotImplementedException();
+            var db = new SQLiteConnection(_dbPath);
+            return Task.FromResult(db.Table<T>().Delete(item => item.Id == id) > 0);
         }
 
         public Task<T> GetItemAsync(int id)
