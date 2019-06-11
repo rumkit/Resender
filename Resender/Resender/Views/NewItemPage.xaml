@@ -17,7 +17,7 @@
             <Label Text="Phone number" FontSize="Medium" />
             <StackLayout Orientation="Horizontal">
                 <Entry Text="{Binding Phone}" d:Text="phone number" FontSize="Small" HorizontalOptions="FillAndExpand"/>
-                <Button Text="Contact" Clicked="GetContact_Clicked"/>
+                <Button Text="Contacts" Clicked="GetContact_Clicked"/>
             </StackLayout>
             <Label Text="Message text" FontSize="Medium" />
             <Editor Text="{Binding Text}" d:Text="text" FontSize="Small" Margin="0" />

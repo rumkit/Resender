@@ -15,9 +15,9 @@ namespace Resender.Services
             items = new List<Item>();
             var mockItems = new List<Item>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Test message", Phone="+79214065172" },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "=Date", Phone="+79211234578" },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Yet another test", Phone="+79210000000" }
+                new Item { Id = 1, Text = "Test message", Phone="+79214065172" },
+                new Item { Id = 2, Text = "=Date", Phone="+79211234578" },
+                new Item { Id = 3, Text = "Yet another test", Phone="+79210000000" }
             };
 
             foreach (var item in mockItems)
@@ -42,7 +42,7 @@ namespace Resender.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
@@ -50,7 +50,7 @@ namespace Resender.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Item> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
