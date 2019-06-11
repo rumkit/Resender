@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Resender.Models;
+using Resender.Services;
 
 namespace Resender.Views
 {
@@ -21,11 +22,11 @@ namespace Resender.Views
 
             Item = new Item
             {
-                Text = "Item name",
-                Phone = "This is an item description."
+                Text = "Text to send",
+                Phone = string.Empty
             };
 
-            BindingContext = this;
+            BindingContext = Item;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
@@ -37,6 +38,19 @@ namespace Resender.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        async void GetContact_Clicked(object sender, EventArgs e)
+        {
+            var contactManager = DependencyService.Get<IContactManager>();
+            Item = new Item
+            {
+                Text = Item.Text,
+                Phone = await contactManager.ChoosePhoneNumber()
+            };
+            // Dirty hack to update bindings
+            // todo: move to viewModel
+            BindingContext = Item;
         }
     }
 }

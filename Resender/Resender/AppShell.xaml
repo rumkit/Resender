@@ -23,13 +23,17 @@
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>                
             </Style>
             <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
-    <!-- Your Pages -->
+    <TabBar>
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}"/>
+        </Tab>
+    </TabBar>
+    <!-- Your Pages 
     <TabBar>
         <Tab Title="Browse" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
@@ -38,7 +42,7 @@
             <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
         </Tab>
     </TabBar>
-
+    -->
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
 
