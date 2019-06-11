@@ -16,19 +16,13 @@ using Xamarin.Forms;
 using System.IO;
 using SQLite;
 
-[assembly: Dependency(typeof(AndroidDataStore))]
 namespace Resender.Droid
 {
-    public class AndroidDataStore : IDataStore<Item>
+    public class AndroidDataRepository<T> : IRepository<T> where T : IDataBaseEntity, new()
     {
-        private string _dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "items.db3");
+        private readonly string _dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "items.db3");
 
-        public AndroidDataStore()
-        {
-
-        }
-
-        public Task<bool> AddItemAsync(Item item)
+        public Task<bool> AddItemAsync(T item)
         {
             return Task.Run(() =>
             {
@@ -47,18 +41,19 @@ namespace Resender.Droid
             throw new NotImplementedException();
         }
 
-        public Task<Item> GetItemAsync(int id)
+        public Task<T> GetItemAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
         {
             var db = new SQLiteConnection(_dbPath);
-            return Task.FromResult<IEnumerable<Item>>(db.Table<Item>().OrderBy(c => c.Id).ToList());
+            // Orderby isn't supported in entities beacuse of c->IDataBaseItem conversion
+            return Task.FromResult<IEnumerable<T>>(db.Table<T>().ToList().OrderBy(c => c.Id));
         }
 
-        public Task<bool> UpdateItemAsync(Item item)
+        public Task<bool> UpdateItemAsync(T item)
         {
             throw new NotImplementedException();
         }

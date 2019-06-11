@@ -8,6 +8,8 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
+        <Label Text="Name:" FontSize="Medium" />
+        <Label Text="{Binding Item.Name}" d:Text="Name" FontSize="Small"/>
         <Label Text="Phone number:" FontSize="Medium" />
         <Label Text="{Binding Item.Phone}" d:Text="Phone number" FontSize="Small"/>
         <Label Text="Message text:" FontSize="Medium" />

@@ -36,13 +36,18 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Phone}" 
-                                d:Text="Item description"
+                            <Label Text="{Binding Name}" 
+                                d:Text="{Binding .}"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="16" />
+                            <Label Text="{Binding Phone}" 
+                                d:Text="Phone number"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="13" />
                             <Label Text="{Binding Text}" 
-                                d:Text="{Binding .}"
+                                d:Text="Text to send"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="13" />                            

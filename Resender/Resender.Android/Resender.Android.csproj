@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidContactManager.cs" />
+    <Compile Include="AndroidDataService.cs" />
     <Compile Include="AndroidDataStore.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

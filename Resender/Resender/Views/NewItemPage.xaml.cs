@@ -45,6 +45,7 @@ namespace Resender.Views
             var contactManager = DependencyService.Get<IContactManager>();
             Item = new Item
             {
+                Name = Item.Name,
                 Text = Item.Text,
                 Phone = await contactManager.ChoosePhoneNumber()
             };

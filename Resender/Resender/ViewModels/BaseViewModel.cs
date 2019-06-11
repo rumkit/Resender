@@ -12,7 +12,7 @@ namespace Resender.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IRepository<Item> DataStore => DependencyService.Get<IDataService>().GetRepository<Item>() ?? new MockDataStore();
 
         bool isBusy = false;
         public bool IsBusy

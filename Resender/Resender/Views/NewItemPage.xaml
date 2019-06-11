@@ -14,6 +14,8 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name" FontSize="Medium" />
+            <Editor Text="{Binding Name}" d:Text="name" FontSize="Small" Margin="0" />
             <Label Text="Phone number" FontSize="Medium" />
             <StackLayout Orientation="Horizontal">
                 <Entry Text="{Binding Phone}" d:Text="phone number" FontSize="Small" HorizontalOptions="FillAndExpand"/>
