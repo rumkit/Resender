@@ -9,13 +9,19 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" Order="Secondary"/>
     </ContentPage.ToolbarItems>
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Name:" FontSize="Medium" />
-        <Label Text="{Binding Item.Name}" d:Text="Name" FontSize="Small"/>
-        <Label Text="Phone number:" FontSize="Medium" />
-        <Label Text="{Binding Item.Phone}" d:Text="Phone number" FontSize="Small"/>
-        <Label Text="Message text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Message text" FontSize="Small"/>
-    </StackLayout>
-    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackLayout Spacing="20" Padding="15" Grid.Row="0">
+            <Label Text="Name:" FontSize="Medium" />
+            <Label Text="{Binding Item.Name}" d:Text="Name" FontSize="Small"/>
+            <Label Text="Phone number:" FontSize="Medium" />
+            <Label Text="{Binding Item.Phone}" d:Text="Phone number" FontSize="Small"/>
+            <Label Text="Message text:" FontSize="Medium" />
+            <Label Text="{Binding Item.Text}" d:Text="Message text" FontSize="Small"/>
+        </StackLayout>
+        <Button Grid.Row="1" Command="{Binding SendMessageCommand}" Text="Send" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="5"/>
+    </Grid>
 </ContentPage>
