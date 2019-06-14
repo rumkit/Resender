@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Plugin.Messaging;
 using Resender.Models;
+using Resender.Services;
 using Xamarin.Forms;
 
 namespace Resender.ViewModels
@@ -19,13 +19,13 @@ namespace Resender.ViewModels
 
         private async void ExecuteSendMessage()
         {
-            await Task.Run(() =>
-                {
-                    var smsMessenger = CrossMessaging.Current.SmsMessenger;
-                    if (smsMessenger.CanSendSmsInBackground)
-                        smsMessenger.SendSmsInBackground(Item.Phone, Item.Text);
-                }
-            );
+            var messageSender = DependencyService.Get<IMessageSender>();
+            var toastNotification = DependencyService.Get<IToastNotification>();
+            var result = await messageSender.TrySendMessageAsync(Item.Phone, Item.Text);
+            if(result)
+                toastNotification.SendLongTime("Message sent");
+            else
+                toastNotification.SendLongTime("Couldn't send message");
         }
 
         public async void DeleteCurrentItem()
