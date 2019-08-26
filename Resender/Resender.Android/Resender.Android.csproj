@@ -72,7 +72,9 @@
     <Compile Include="AndroidDataStore.cs" />
     <Compile Include="AndroidMessageSender.cs" />
     <Compile Include="AndroidToastNotification.cs" />
+    <Compile Include="PermissionHelper.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="PermissionsEventArgs.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

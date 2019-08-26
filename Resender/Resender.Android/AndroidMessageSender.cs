@@ -26,29 +26,24 @@ namespace Resender.Droid
         {
             if ((int)Build.VERSION.SdkInt < 23)
             {
-                await SendMessageAsync(phoneNumber, message);         
-                return true;
-            }
-
-            return await GetMessagePermissionAsync(phoneNumber, message);            
-        }
-
-        async Task<bool> GetMessagePermissionAsync(string phoneNumber, string message)
-        {
-            //Check to see if any permission in our group is available, if one, then all are
-            const string permission = Manifest.Permission.SendSms;
-            var context = MainActivity.Instance;
-            if (context.CheckSelfPermission(permission) == (int)Permission.Granted)
-            {
                 await SendMessageAsync(phoneNumber, message);
                 return true;
             }
 
-            //Finally request permissions with the list of permissions and Id
-            context.RequestPermissions(new[] { Manifest.Permission.SendSms }, 101);
-            //todo: add another send attempt if request succeed
-            return false;
+            return await SendMessageWithPermissionRequestAsync(phoneNumber, message);
         }
+
+        async Task<bool> SendMessageWithPermissionRequestAsync(string phoneNumber, string message)
+        {
+            var context = MainActivity.Instance;
+            // Check permission and try to send message
+            if (await PermissionsHelper.RequestPermissionAsync(Manifest.Permission.SendSms))
+            {
+                await SendMessageAsync(phoneNumber, message);
+                return true;
+            }
+            return false;
+        }      
 
         async Task SendMessageAsync(string phoneNumber, string message)
         {

@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Resender.Droid
 {
@@ -14,9 +16,15 @@ namespace Resender.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         internal static MainActivity Instance { get; private set; }
+
+        internal event EventHandler<PermissionsEventArgs> RequestPermissionsCompleted;
+
+        internal SemaphoreSlim PermissionSemaphore { get; private set; }
+        internal TaskCompletionSource<bool> source;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Instance = this;
+            Instance = this;            
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             
@@ -32,7 +40,9 @@ namespace Resender.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+
+            RequestPermissionsCompleted?.Invoke(this, new PermissionsEventArgs(permissions, grantResults));
+        }        
 
         public event Action<int, Result, Intent> ActivityResult;
 
