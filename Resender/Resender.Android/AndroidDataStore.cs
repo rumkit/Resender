@@ -44,7 +44,8 @@ namespace Resender.Droid
 
         public Task<T> GetItemAsync(int id)
         {
-            throw new NotImplementedException();
+            var db = new SQLiteConnection(_dbPath);
+            return Task.FromResult<T>(db.Table<T>().FirstOrDefault(t => t.Id == id));
         }
 
         public Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)

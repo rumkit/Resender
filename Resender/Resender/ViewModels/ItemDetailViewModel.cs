@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Resender.Models;
 using Resender.Services;
 using Xamarin.Forms;
+using Plugin.AppShortcuts;
+using Plugin.AppShortcuts.Icons;
 
 namespace Resender.ViewModels
 {
@@ -23,9 +25,24 @@ namespace Resender.ViewModels
             var toastNotification = DependencyService.Get<IToastNotification>();
             var result = await messageSender.TrySendMessageAsync(Item.Phone, Item.Text);
             if(result)
+            {
                 toastNotification.SendLongTime("Message sent");
+                AddMessageShortcut(Item);
+            }                
             else
                 toastNotification.SendLongTime("Couldn't send message");
+        }
+
+        private async void AddMessageShortcut(Item item)
+        {
+            var shortcut = new Shortcut()
+            {
+                Label = item.Name,
+                Description = "Send message: " + item.Text,
+                Icon = new FavoriteIcon(),
+                Uri = $"rsnd://Resender/SendMessage/{item.Id}"
+            };
+            await CrossAppShortcuts.Current.AddShortcut(shortcut);
         }
 
         public async void DeleteCurrentItem()
